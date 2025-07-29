@@ -138,6 +138,7 @@ celerybeat.pid
 .env
 .envrc
 .venv
+JettScrible_bot_env/
 env/
 venv/
 ENV/
