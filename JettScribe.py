@@ -457,7 +457,16 @@ async def handle_voice_message(message: types.Message, state: FSMContext):
     openai_lang_code = LANGUAGE_MAP.get(chosen_language, "en")# we have "en" as default
 
 
-    temp_file_path = f"E:/!dump/JettScrible_dump/{message.from_user.id}_{message.date.timestamp()}"
+    #temp_file_path = f"E:/!dump/JettScrible_dump/{message.from_user.id}_{message.date.timestamp()}"
+    if os.name == "posix":
+       current_directory = os.path.dirname(os.path.abspath(__file__))
+       temp_folder = os.path.join(current_directory, "temp")
+
+       if not os.path.exists(temp_folder):
+          os.makedirs(temp_folder)
+       temp_file_path =  os.path.join(temp_folder, f"{message.from_user.id}_{message.date.timestamp()}")
+    else:
+          temp_file_path = f"E:/!dump/JettScrible_dump/{message.from_user.id}_{message.date.timestamp()}"
     
     #determine what exactly received: a voice or video note
     file_info_to_download = None
